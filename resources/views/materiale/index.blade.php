@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Evento Id</th>
+										<th>Evento</th>
 										<th>Nombre Materiales</th>
 										<th>Tipo</th>
 										<th>Archivo</th>
@@ -49,7 +49,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $materiale->evento_id }}</td>
+											<td>{{ $materiale->evento->nombre_evento }}</td>
 											<td>{{ $materiale->nombre_materiales }}</td>
 											<td>{{ $materiale->tipo }}</td>
 											<td>{{ $materiale->archivo }}</td>

@@ -36,6 +36,10 @@
                             <strong>Evento Id:</strong>
                             {{ $charla->evento_id }}
                         </div>
+                        <div class="form-group">
+                            <strong>Expositor Id:</strong>
+                            {{ $charla->expositor_id }}
+                        </div>
 
                     </div>
                 </div>

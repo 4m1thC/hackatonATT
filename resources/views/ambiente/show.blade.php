@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Evento Id:</strong>
-                            {{ $ambiente->evento_id }}
+                            {{ $ambiente->evento->nombre_evento }}
                         </div>
 
                     </div>

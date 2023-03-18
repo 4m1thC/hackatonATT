@@ -36,6 +36,10 @@
                             <strong>Usuario Id:</strong>
                             {{ $certificado->usuario_id }}
                         </div>
+                        <div class="form-group">
+                            <strong>Charla Id:</strong>
+                            {{ $certificado->charla_id }}
+                        </div>
 
                     </div>
                 </div>

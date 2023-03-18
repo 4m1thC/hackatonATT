@@ -37,7 +37,7 @@
                                         <th>No</th>
                                         
 										<th>Informacion</th>
-										<th>Usuario Id</th>
+										<th>Nombre expositor</th>
 
                                         <th></th>
                                     </tr>
@@ -48,7 +48,7 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $expositore->informacion }}</td>
-											<td>{{ $expositore->usuario_id }}</td>
+											<td>{{ $expositore->user->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('expositores.destroy',$expositore->id) }}" method="POST">

@@ -12,18 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('charlas', function (Blueprint $table) {
-            $table->engine ="InnoDB";
+            $table->engine = "InnoDB";
             $table->id();
 
             $table->string('tema');
             $table->string('horario');
             $table->string('archivo');
-            
+
             $table->timestamps();
 
             $table->foreignId('evento_id')
                 ->nullable()
                 ->constrained('eventos')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('expositor_id')
+                ->nullable()
+                ->constrained('expositores')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });

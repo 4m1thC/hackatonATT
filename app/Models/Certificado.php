@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  * @property $usuario_id
+ * @property $charla_id
  *
+ * @property Charla $charla
  * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -35,9 +37,17 @@ class Certificado extends Model
      *
      * @var array
      */
-    protected $fillable = ['folio','horas_academicas','fecha_expedido','usuario_id'];
+    protected $fillable = ['folio','horas_academicas','fecha_expedido','usuario_id','charla_id'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function charla()
+    {
+        return $this->hasOne('App\Models\Charla', 'id', 'charla_id');
+    }
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

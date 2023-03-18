@@ -16,11 +16,12 @@
                                 {{ __('Certificado') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('certificados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                            <div class="float-right">
+                                <a href="{{ route('certificados.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,11 +36,12 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Folio</th>
-										<th>Horas Academicas</th>
-										<th>Fecha Expedido</th>
-										<th>Usuario Id</th>
+
+                                        <th>Folio</th>
+                                        <th>Horas Academicas</th>
+                                        <th>Fecha Expedido</th>
+                                        <th>Usuario Id</th>
+                                        <th>Charla Id</th>
 
                                         <th></th>
                                     </tr>
@@ -48,19 +50,29 @@
                                     @foreach ($certificados as $certificado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $certificado->folio }}</td>
-											<td>{{ $certificado->horas_academicas }}</td>
-											<td>{{ $certificado->fecha_expedido }}</td>
-											<td>{{ $certificado->usuario_id }}</td>
+
+                                            <td>{{ $certificado->folio }}</td>
+                                            <td>{{ $certificado->horas_academicas }}</td>
+                                            <td>{{ $certificado->fecha_expedido }}</td>
+                                            <td>{{ $certificado->usuario_id }}</td>
+                                            <td>{{ $certificado->charla_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('certificados.destroy',$certificado->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('certificados.show',$certificado->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('certificados.edit',$certificado->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('certificados.destroy', $certificado->id) }}"
+                                                    method="POST">
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('certificados.pdf', $certificado->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> PDF</a>
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('certificados.show', $certificado->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('certificados.edit', $certificado->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

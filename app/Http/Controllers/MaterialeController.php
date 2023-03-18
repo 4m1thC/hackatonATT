@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\Materiale;
+
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +34,8 @@ class MaterialeController extends Controller
     public function create()
     {
         $materiale = new Materiale();
-        return view('materiale.create', compact('materiale'));
+        $eventos = Evento::pluck('nombre_evento','id');
+        return view('materiale.create', compact('materiale', 'eventos'));
     }
 
     /**
@@ -73,8 +76,9 @@ class MaterialeController extends Controller
     public function edit($id)
     {
         $materiale = Materiale::find($id);
+        $eventos = Evento::pluck('nombre_evento','id');
 
-        return view('materiale.edit', compact('materiale'));
+        return view('materiale.edit', compact('materiale', 'eventos'));
     }
 
     /**

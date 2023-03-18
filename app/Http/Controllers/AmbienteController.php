@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ambiente;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
 /**
@@ -20,6 +21,8 @@ class AmbienteController extends Controller
     {
         $ambientes = Ambiente::paginate();
 
+        $eventos = Evento::pluck('nombre_evento','id');
+
         return view('ambiente.index', compact('ambientes'))
             ->with('i', (request()->input('page', 1) - 1) * $ambientes->perPage());
     }
@@ -32,7 +35,10 @@ class AmbienteController extends Controller
     public function create()
     {
         $ambiente = new Ambiente();
-        return view('ambiente.create', compact('ambiente'));
+
+        $eventos = Evento::pluck('nombre_evento','id');
+        
+        return view('ambiente.create', compact('ambiente', 'eventos'));
     }
 
     /**
@@ -74,7 +80,9 @@ class AmbienteController extends Controller
     {
         $ambiente = Ambiente::find($id);
 
-        return view('ambiente.edit', compact('ambiente'));
+        $eventos = Evento::pluck('nombre_evento','id');
+
+       return view('ambiente.edit', compact('ambiente', 'eventos'));
     }
 
     /**

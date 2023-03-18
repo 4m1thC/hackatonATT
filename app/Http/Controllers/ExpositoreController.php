@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expositore;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +33,10 @@ class ExpositoreController extends Controller
     public function create()
     {
         $expositore = new Expositore();
-        return view('expositore.create', compact('expositore'));
+
+        $usuarios = User::pluck('name','id');
+
+        return view('expositore.create', compact('expositore', 'usuarios'));
     }
 
     /**
@@ -74,7 +78,9 @@ class ExpositoreController extends Controller
     {
         $expositore = Expositore::find($id);
 
-        return view('expositore.edit', compact('expositore'));
+        $usuarios = User::pluck('name','id');
+
+        return view('expositore.edit', compact('expositore', 'usuarios'));
     }
 
     /**

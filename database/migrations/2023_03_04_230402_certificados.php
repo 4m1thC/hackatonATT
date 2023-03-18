@@ -12,18 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('certificados', function (Blueprint $table) {
-            $table->engine ="InnoDB";
+            $table->engine = "InnoDB";
             $table->id();
 
             $table->string('folio');
             $table->integer('horas_academicas');
             $table->dateTime('fecha_expedido');
-            
+
             $table->timestamps();
 
             $table->foreignId('usuario_id')
                 ->nullable()
                 ->constrained('users')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->foreignId('charla_id')
+                ->nullable()
+                ->constrained('charlas')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });

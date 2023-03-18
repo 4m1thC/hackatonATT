@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificado;
+use App\Models\Charla;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 /**
  * Class CertificadoController
@@ -32,7 +36,11 @@ class CertificadoController extends Controller
     public function create()
     {
         $certificado = new Certificado();
-        return view('certificado.create', compact('certificado'));
+
+        $charlas = Charla::pluck('tema', 'id');
+        $usuarios = User::pluck('name', 'id');
+
+        return view('certificado.create', compact('certificado', 'usuarios', 'charlas'));
     }
 
     /**
@@ -64,6 +72,17 @@ class CertificadoController extends Controller
         return view('certificado.show', compact('certificado'));
     }
 
+    public function pdf($id)
+    {
+        $certificado = Certificado::find($id);
+
+        $pdf = Pdf::loadView('certificado.pdf', ['certificado' => $certificado]);
+        
+        $pdf->setPaper('landscape');
+     
+        return $pdf->download('certificacion.pdf');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,7 +93,10 @@ class CertificadoController extends Controller
     {
         $certificado = Certificado::find($id);
 
-        return view('certificado.edit', compact('certificado'));
+        $charlas = Charla::pluck('tema', 'id');
+        $usuarios = User::pluck('name', 'id');
+
+        return view('certificado.edit', compact('certificado', 'usuarios', 'charlas'));
     }
 
     /**

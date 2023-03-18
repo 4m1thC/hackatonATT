@@ -2,8 +2,8 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('evento_id') }}
-            {{ Form::text('evento_id', $materiale->evento_id, ['class' => 'form-control' . ($errors->has('evento_id') ? ' is-invalid' : ''), 'placeholder' => 'Evento Id']) }}
+            {{ Form::label('Evento') }}
+            {{ Form::select('evento_id', $eventos, $materiale->evento_id, ['class' => 'form-control' . ($errors->has('evento_id') ? ' is-invalid' : ''), 'placeholder' => 'Evento']) }}
             {!! $errors->first('evento_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

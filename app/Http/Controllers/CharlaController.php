@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Charla;
+use App\Models\Evento;
+use App\Models\Expositore;
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +34,11 @@ class CharlaController extends Controller
     public function create()
     {
         $charla = new Charla();
-        return view('charla.create', compact('charla'));
+
+        $eventos = Evento::pluck('nombre_evento', 'id');
+        $expositores = Expositore::pluck('id', 'id');
+
+        return view('charla.create', compact('charla', 'eventos', 'expositores'));
     }
 
     /**
@@ -74,7 +80,10 @@ class CharlaController extends Controller
     {
         $charla = Charla::find($id);
 
-        return view('charla.edit', compact('charla'));
+        $eventos = Evento::pluck('nombre_evento', 'id');
+        //$expositores = Evento::all();
+
+        return view('charla.edit', compact('charla', 'eventos'));
     }
 
     /**

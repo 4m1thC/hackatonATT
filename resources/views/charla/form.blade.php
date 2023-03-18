@@ -18,8 +18,13 @@
         </div>
         <div class="form-group">
             {{ Form::label('evento_id') }}
-            {{ Form::text('evento_id', $charla->evento_id, ['class' => 'form-control' . ($errors->has('evento_id') ? ' is-invalid' : ''), 'placeholder' => 'Evento Id']) }}
+            {{ Form::select('evento_id', $eventos, $charla->evento_id, ['class' => 'form-control' . ($errors->has('evento_id') ? ' is-invalid' : ''), 'placeholder' => 'Evento Id']) }}
             {!! $errors->first('evento_id', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('expositor_id') }}
+            {{ Form::select('expositor_id', $expositores, $charla->expositor_id, ['class' => 'form-control' . ($errors->has('expositor_id') ? ' is-invalid' : ''), 'placeholder' => 'Expositor Id']) }}
+            {!! $errors->first('expositor_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>

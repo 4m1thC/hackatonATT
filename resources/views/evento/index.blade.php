@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -16,11 +16,12 @@
                                 {{ __('Evento') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('eventos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                            <div class="float-right">
+                                <a href="{{ route('eventos.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -30,49 +31,35 @@
                     @endif
 
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-										<th>Nombre Evento</th>
-										<th>Descripcion</th>
-										<th>Tipo Evento</th>
-										<th>Nro Cupos</th>
-										<th>Fecha</th>
 
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($eventos as $evento)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $evento->nombre_evento }}</td>
-											<td>{{ $evento->descripcion }}</td>
-											<td>{{ $evento->tipo_evento }}</td>
-											<td>{{ $evento->nro_cupos }}</td>
-											<td>{{ $evento->fecha }}</td>
+                </div>
 
-                                            <td>
-                                                <form action="{{ route('eventos.destroy',$evento->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('eventos.show',$evento->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('eventos.edit',$evento->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                @foreach ($eventos as $evento)
+                    <div class="card text-center mt-1">
+                        <div class="card-header">
+                            {{ $evento->tipo_evento }}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $evento->nombre_evento }}</h5>
+                            <p class="card-text">{{ $evento->descripcion }}
+                            </p>
+                            <p class="card-text">{{ $evento->nro_cupos }}
+                            </p>
+                            <a href="{{ route('eventos.show', $evento->id) }}" class="btn btn-primary">Ver mas</a>
+                            <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST">
+                                <a class="btn btn-sm btn-success" href="{{ route('eventos.edit', $evento->id) }}"><i
+                                        class="fa fa-fw fa-edit"></i> Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
+                                    Delete</button>
+                            </form>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ $evento->fecha }}
                         </div>
                     </div>
-                </div>
+                @endforeach
                 {!! $eventos->links() !!}
             </div>
         </div>

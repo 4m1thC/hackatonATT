@@ -39,7 +39,7 @@
 										<th>Nombre Ambiente</th>
 										<th>Direccion</th>
 										<th>Descripcion</th>
-										<th>Evento Id</th>
+										<th>Evento</th>
 
                                         <th></th>
                                     </tr>
@@ -52,7 +52,7 @@
 											<td>{{ $ambiente->nombre_ambiente }}</td>
 											<td>{{ $ambiente->direccion }}</td>
 											<td>{{ $ambiente->descripcion }}</td>
-											<td>{{ $ambiente->evento_id }}</td>
+											<td>{{ $ambiente->evento->nombre_evento }}</td>
 
                                             <td>
                                                 <form action="{{ route('ambientes.destroy',$ambiente->id) }}" method="POST">

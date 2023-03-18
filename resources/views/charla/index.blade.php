@@ -40,6 +40,7 @@
 										<th>Horario</th>
 										<th>Archivo</th>
 										<th>Evento Id</th>
+										<th>Expositor Id</th>
 
                                         <th></th>
                                     </tr>
@@ -52,7 +53,8 @@
 											<td>{{ $charla->tema }}</td>
 											<td>{{ $charla->horario }}</td>
 											<td>{{ $charla->archivo }}</td>
-											<td>{{ $charla->evento_id }}</td>
+											<td>{{ $charla->evento->nombre_evento }}</td>
+											<td>{{ $charla->expositore->user->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('charlas.destroy',$charla->id) }}" method="POST">
