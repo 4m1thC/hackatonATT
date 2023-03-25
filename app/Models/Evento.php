@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $tipo_evento
  * @property $nro_cupos
  * @property $fecha
+ * @property $portada
  * @property $created_at
  * @property $updated_at
  *
@@ -31,6 +32,7 @@ class Evento extends Model
 		'tipo_evento' => 'required',
 		'nro_cupos' => 'required',
 		'fecha' => 'required',
+		'portada' => 'required',
     ];
 
     protected $perPage = 20;
@@ -40,7 +42,7 @@ class Evento extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre_evento','descripcion','tipo_evento','nro_cupos','fecha'];
+    protected $fillable = ['nombre_evento','descripcion','tipo_evento','nro_cupos','fecha','portada'];
 
 
     /**

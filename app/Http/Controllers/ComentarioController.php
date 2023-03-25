@@ -24,6 +24,14 @@ class ComentarioController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $comentarios->perPage());
     }
 
+    public function indexWelcome()
+    {
+        $comentarios = Comentario::paginate();
+
+        return view('welcome', compact('comentarios'))
+            ->with('i', (request()->input('page', 1) - 1) * $comentarios->perPage());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,9 +51,16 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Comentario::$rules);
+        //request()->validate(Comentario::$rules);
 
-        $comentario = Comentario::create($request->all());
+        $newpost = new Comentario();
+
+        $newpost->contenido = $request->contenido;
+        $newpost->usuario_id = auth()->user()->id;
+
+        $newpost->save();
+
+        // $comentario = Comentario::create($request->all());
 
         return redirect()->route('comentarios.index')
             ->with('success', 'Comentario created successfully.');

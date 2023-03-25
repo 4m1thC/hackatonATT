@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Charla;
 use Illuminate\Http\Request;
 
 /**
@@ -43,9 +44,28 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Evento::$rules);
 
-        $evento = Evento::create($request->all());
+        $newpost = new Evento();
+
+        if ($request->hasFile('portada')) {
+            $file = $request->file('portada');
+            $destinoPath = 'portadas/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('portada')->move($destinoPath, $filename);
+            $newpost->portada = $destinoPath . $filename;
+        }
+
+        $newpost->nombre_evento = $request->nombre_evento;
+        $newpost->descripcion = $request->descripcion;
+        $newpost->tipo_evento = $request->tipo_evento;
+        $newpost->nro_cupos = $request->nro_cupos;
+        $newpost->fecha = $request->fecha;
+
+        $newpost->save();
+
+        // request()->validate(Evento::$rules);
+
+        // $evento = Evento::create($request->all());
 
         return redirect()->route('eventos.index')
             ->with('success', 'Evento created successfully.');
@@ -61,7 +81,8 @@ class EventoController extends Controller
     {
         $evento = Evento::find($id);
 
-        return view('evento.show', compact('evento'));
+        $charlas = Charla::all();
+        return view('evento.show', compact('evento', 'charlas'));
     }
 
     /**
@@ -86,9 +107,26 @@ class EventoController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        request()->validate(Evento::$rules);
+        $newpost = $evento;
 
-        $evento->update($request->all());
+        if ($request->hasFile('portada')) {
+            $file = $request->file('portada');
+            $destinoPath = 'portadas/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('portada')->move($destinoPath, $filename);
+            $newpost->portada = $destinoPath . $filename;
+        }
+
+        $newpost->nombre_evento = $request->nombre_evento;
+        $newpost->descripcion = $request->descripcion;
+        $newpost->tipo_evento = $request->tipo_evento;
+        $newpost->nro_cupos = $request->nro_cupos;
+        $newpost->fecha = $request->fecha;
+
+        $newpost->save();
+        // request()->validate(Evento::$rules);
+
+        // $evento->update($request->all());
 
         return redirect()->route('eventos.index')
             ->with('success', 'Evento updated successfully');

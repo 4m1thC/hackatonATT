@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('descripcion') }}
-            {{ Form::text('descripcion', $evento->descripcion, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
+            {{ Form::textarea('descripcion', $evento->descripcion, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
             {!! $errors->first('descripcion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -18,13 +18,26 @@
         </div>
         <div class="form-group">
             {{ Form::label('nro_cupos') }}
-            {{ Form::text('nro_cupos', $evento->nro_cupos, ['class' => 'form-control' . ($errors->has('nro_cupos') ? ' is-invalid' : ''), 'placeholder' => 'Nro Cupos']) }}
+            {{ Form::number('nro_cupos', $evento->nro_cupos, ['class' => 'form-control' . ($errors->has('nro_cupos') ? ' is-invalid' : ''), 'placeholder' => 'Nro Cupos']) }}
             {!! $errors->first('nro_cupos', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('fecha') }}
-            {{ Form::text('fecha', $evento->fecha, ['class' => 'form-control' . ($errors->has('fecha') ? ' is-invalid' : ''), 'placeholder' => 'Fecha']) }}
+            {{ Form::Date('fecha', $evento->fecha, ['class' => 'form-control' . ($errors->has('fecha') ? ' is-invalid' : ''), 'placeholder' => 'Fecha']) }}
             {!! $errors->first('fecha', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        {{-- <div class="form-group">
+            {{ Form::label('portada') }}
+            {{ Form::text('portada', $evento->portada, ['class' => 'form-control' . ($errors->has('portada') ? ' is-invalid' : ''), 'placeholder' => 'Portada']) }}
+            {!! $errors->first('portada', '<div class="invalid-feedback">:message</div>') !!}
+        </div> --}}
+
+        <div class="form-group">
+            {{ Form::label('portada') }}
+            <br>
+            <form class="form-group" enctype="multipart/form-data">
+                <input type="file" name="portada" id="">
+            </form>
         </div>
 
     </div>

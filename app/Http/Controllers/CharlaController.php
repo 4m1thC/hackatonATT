@@ -81,9 +81,9 @@ class CharlaController extends Controller
         $charla = Charla::find($id);
 
         $eventos = Evento::pluck('nombre_evento', 'id');
-        //$expositores = Evento::all();
+        $expositores = Expositore::pluck('id', 'id');
 
-        return view('charla.edit', compact('charla', 'eventos'));
+        return view('charla.edit', compact('charla', 'eventos', 'expositores'));
     }
 
     /**

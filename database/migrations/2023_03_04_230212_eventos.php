@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tipo_evento');
             $table->integer('nro_cupos');
             $table->dateTime('fecha');
+            $table->string('portada');
             $table->timestamps();
         });
     }

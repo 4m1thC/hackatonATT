@@ -59,6 +59,11 @@
                                 <a class="nav-link"
                                     href="{{ route('inscribe-usuario-eventos.index') }}">{{ __('Inscribe') }}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('comentarios.index') }}">{{ __('Comentarios') }}</a>
+                            </li>
                         </ul>
                     @endif
 
@@ -85,6 +90,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('perfil.index') }}">
+                                        {{ __('Perfil') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

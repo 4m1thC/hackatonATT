@@ -40,8 +40,8 @@
                                         <th>Folio</th>
                                         <th>Horas Academicas</th>
                                         <th>Fecha Expedido</th>
-                                        <th>Usuario Id</th>
-                                        <th>Charla Id</th>
+                                        <th>Usuario</th>
+                                        <th>Charla</th>
 
                                         <th></th>
                                     </tr>
@@ -54,8 +54,8 @@
                                             <td>{{ $certificado->folio }}</td>
                                             <td>{{ $certificado->horas_academicas }}</td>
                                             <td>{{ $certificado->fecha_expedido }}</td>
-                                            <td>{{ $certificado->usuario_id }}</td>
-                                            <td>{{ $certificado->charla_id }}</td>
+                                            <td>{{ $certificado->user->name }}</td>
+                                            <td>{{ $certificado->charla->tema }}</td>
 
                                             <td>
                                                 <form action="{{ route('certificados.destroy', $certificado->id) }}"

@@ -34,8 +34,10 @@ class MaterialeController extends Controller
     public function create()
     {
         $materiale = new Materiale();
-        $eventos = Evento::pluck('nombre_evento','id');
-        return view('materiale.create', compact('materiale', 'eventos'));
+        $eventos = Evento::pluck('nombre_evento', 'id');
+        $tipos = ["pdf","imagen","video"];
+
+        return view('materiale.create', compact('materiale', 'eventos', 'tipos'));
     }
 
     /**
@@ -46,9 +48,25 @@ class MaterialeController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Materiale::$rules);
+        $newpost = new Materiale();
 
-        $materiale = Materiale::create($request->all());
+        if ($request->hasFile('archivo')) {
+            $file = $request->file('archivo');
+            $destinoPath = 'material/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('archivo')->move($destinoPath, $filename);
+            $newpost->archivo = $destinoPath . $filename;
+        }
+
+        $newpost->evento_id = $request->evento_id;
+        $newpost->nombre_materiales = $request->nombre_materiales;
+        $newpost->tipo = $request->tipo;
+
+        $newpost->save();
+
+        // request()->validate(Materiale::$rules);
+
+        // $materiale = Materiale::create($request->all());
 
         return redirect()->route('materiales.index')
             ->with('success', 'Materiale created successfully.');
@@ -76,9 +94,10 @@ class MaterialeController extends Controller
     public function edit($id)
     {
         $materiale = Materiale::find($id);
-        $eventos = Evento::pluck('nombre_evento','id');
+        $eventos = Evento::pluck('nombre_evento', 'id');
+        $tipos = ["pdf","imagen","video"];
 
-        return view('materiale.edit', compact('materiale', 'eventos'));
+        return view('materiale.edit', compact('materiale', 'eventos', 'tipos'));
     }
 
     /**
@@ -90,12 +109,30 @@ class MaterialeController extends Controller
      */
     public function update(Request $request, Materiale $materiale)
     {
-        request()->validate(Materiale::$rules);
+        $newpost = $materiale;
 
-        $materiale->update($request->all());
+        if ($request->hasFile('archivo')) {
+            $file = $request->file('archivo');
+            $destinoPath = 'material/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('archivo')->move($destinoPath, $filename);
+            $newpost->archivo = $destinoPath . $filename;
+        }
+
+        $newpost->evento_id = $request->evento_id;
+        $newpost->nombre_materiales = $request->nombre_materiales;
+        $newpost->tipo = $request->tipo;
+
+        $newpost->save();
+
 
         return redirect()->route('materiales.index')
-            ->with('success', 'Materiale updated successfully');
+            ->with('success', 'Materiale created successfully.');
+
+        // $materiale->update($request->all());
+
+        // return redirect()->route('materiales.index')
+        //     ->with('success', 'Materiale updated successfully');
     }
 
     /**
