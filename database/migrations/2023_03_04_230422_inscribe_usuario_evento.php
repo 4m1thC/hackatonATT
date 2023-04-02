@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->foreignId('usuario_id')
                 ->nullable()
+                ->unsigned()
                 ->constrained('users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
@@ -25,9 +26,12 @@ return new class extends Migration
 
             $table->foreignId('evento_id')
                 ->nullable()
+                ->unsigned()
                 ->constrained('users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+                
+            $table->timestamps();
         });
     }
 

@@ -51,7 +51,21 @@ class InscribeUsuarioEventoController extends Controller
             ->with('success', 'InscribeUsuarioEvento created successfully.');
     }
 
-    /**
+    public function inscrito(Request $request)
+    {
+        $newpost = new InscribeUsuarioEvento();
+
+        $newpost->usuario_id = auth()->user()->id;
+        $newpost->evento_id = $request->id_evento;
+        $newpost->estado_asistencia = "pendiente";
+
+        $newpost->save();
+
+        return redirect()->back();
+        //     ->with('success', 'InscribeUsuarioEvento created successfully.');
+    }
+    
+   /**
      * Display the specified resource.
      *
      * @param  int $id

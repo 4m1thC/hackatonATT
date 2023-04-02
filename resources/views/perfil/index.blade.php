@@ -37,7 +37,6 @@
             <!-- Masthead Subheading-->
             <p class="masthead-subheading font-weight-light mb-0">{{ $user->name }}</p>
             <p class="masthead-subheading font-weight-light mb-0">{{ $user->email }}</p>
-            <p class="masthead-subheading font-weight-light mb-0">{{ $user->id }}</p>
         </div>
     </header>
     <!-- Portfolio Section-->

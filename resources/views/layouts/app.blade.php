@@ -64,6 +64,11 @@
                                 <a class="nav-link"
                                     href="{{ route('comentarios.index') }}">{{ __('Comentarios') }}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('home') }}">{{ __('Preguntas frecuentes') }}</a>
+                            </li>
                         </ul>
                     @endif
 

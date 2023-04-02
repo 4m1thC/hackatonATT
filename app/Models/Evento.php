@@ -69,5 +69,10 @@ class Evento extends Model
         return $this->hasMany('App\Models\Materiale', 'evento_id', 'id');
     }
     
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class, 'inscribe');
+    // }
+    
 
 }

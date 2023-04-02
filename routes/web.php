@@ -3,6 +3,8 @@
 use App\Http\Controllers\ComentarioController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\InscribeUsuarioEventoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +39,5 @@ Route::resource('inscribe-usuario-eventos',  App\Http\Controllers\InscribeUsuari
 Route::resource('comentarios',  App\Http\Controllers\ComentarioController::class)->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/inscribir', [InscribeUsuarioEventoController::class, 'inscrito'])->name('inscribir_usuario');

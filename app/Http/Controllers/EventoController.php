@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materiale;
+use App\Models\Ambiente;
 use App\Models\Evento;
 use App\Models\Charla;
 use Illuminate\Http\Request;
@@ -82,7 +84,10 @@ class EventoController extends Controller
         $evento = Evento::find($id);
 
         $charlas = Charla::all();
-        return view('evento.show', compact('evento', 'charlas'));
+        $materiales = Materiale::all();
+        $ambientes = Ambiente::all();
+
+        return view('evento.show', compact('evento', 'charlas', 'materiales', 'ambientes'));
     }
 
     /**

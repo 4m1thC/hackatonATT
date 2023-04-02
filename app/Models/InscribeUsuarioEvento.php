@@ -39,7 +39,7 @@ class InscribeUsuarioEvento extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'usuario_id');
+        return $this->hasMany('App\Models\User', 'id', 'usuario_id');
     }
     
     /**
@@ -47,7 +47,7 @@ class InscribeUsuarioEvento extends Model
      */
     public function evento()
     {
-        return $this->hasOne('App\Models\Evento', 'id', 'evento_id');
+        return $this->hasMany('App\Models\Evento', 'id', 'evento_id');
     }
     
 
