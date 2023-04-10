@@ -27,10 +27,10 @@ return new class extends Migration
             $table->foreignId('evento_id')
                 ->nullable()
                 ->unsigned()
-                ->constrained('users')
+                ->constrained('eventos')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-                
+
             $table->timestamps();
         });
     }

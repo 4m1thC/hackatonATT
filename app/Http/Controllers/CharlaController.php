@@ -49,9 +49,26 @@ class CharlaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Charla::$rules);
+        $newpost = new Charla();
 
-        $charla = Charla::create($request->all());
+        if ($request->hasFile('archivo')) {
+            $file = $request->file('archivo');
+            $destinoPath = 'archivos/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('archivo')->move($destinoPath, $filename);
+            $newpost->archivo = $destinoPath . $filename;
+        }
+
+        $newpost->tema = $request->tema;
+        $newpost->horario = $request->horario;
+        $newpost->evento_id = $request->evento_id;
+        $newpost->expositor_id = $request->expositor_id;
+
+        $newpost->save();
+
+        // request()->validate(Charla::$rules);
+
+        // $charla = Charla::create($request->all());
 
         return redirect()->route('charlas.index')
             ->with('success', 'Charla created successfully.');
@@ -95,9 +112,27 @@ class CharlaController extends Controller
      */
     public function update(Request $request, Charla $charla)
     {
-        request()->validate(Charla::$rules);
 
-        $charla->update($request->all());
+        $newpost = $charla;
+
+        if ($request->hasFile('archivo')) {
+            $file = $request->file('archivo');
+            $destinoPath = 'archivos/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSucess = $request->file('archivo')->move($destinoPath, $filename);
+            $newpost->archivo = $destinoPath . $filename;
+        }
+
+        $newpost->tema = $request->tema;
+        $newpost->horario = $request->horario;
+        $newpost->evento_id = $request->evento_id;
+        $newpost->expositor_id = $request->expositor_id;
+
+        $newpost->save();
+
+        // request()->validate(Charla::$rules);
+
+        // $charla->update($request->all());
 
         return redirect()->route('charlas.index')
             ->with('success', 'Charla updated successfully');

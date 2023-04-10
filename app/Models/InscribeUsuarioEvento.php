@@ -37,7 +37,7 @@ class InscribeUsuarioEvento extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function users()
     {
         return $this->hasMany('App\Models\User', 'id', 'usuario_id');
     }
@@ -45,7 +45,7 @@ class InscribeUsuarioEvento extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function evento()
+    public function eventos()
     {
         return $this->hasMany('App\Models\Evento', 'id', 'evento_id');
     }

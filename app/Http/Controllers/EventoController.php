@@ -6,6 +6,7 @@ use App\Models\Materiale;
 use App\Models\Ambiente;
 use App\Models\Evento;
 use App\Models\Charla;
+use App\Models\InscribeUsuarioEvento;
 use Illuminate\Http\Request;
 
 /**
@@ -23,7 +24,10 @@ class EventoController extends Controller
     {
         $eventos = Evento::paginate();
 
-        return view('evento.index', compact('eventos'))
+        $inscritos = InscribeUsuarioEvento::all();
+        $sw = 'false';
+
+        return view('evento.index', compact('eventos', 'inscritos', 'sw'))
             ->with('i', (request()->input('page', 1) - 1) * $eventos->perPage());
     }
 
@@ -87,7 +91,17 @@ class EventoController extends Controller
         $materiales = Materiale::all();
         $ambientes = Ambiente::all();
 
-        return view('evento.show', compact('evento', 'charlas', 'materiales', 'ambientes'));
+        $inscritos = InscribeUsuarioEvento::all();
+        $sw = 'false';
+
+        $c = 0;
+        foreach ($inscritos as $inscrito) {
+            if ($inscrito->evento_id == $id) {
+                $c+=1;
+            }
+        }
+
+        return view('evento.show', compact('evento', 'charlas', 'materiales', 'ambientes', 'inscritos', 'sw', 'c'));
     }
 
     /**

@@ -27,7 +27,7 @@ class UserController extends Controller
 
         return view('perfil.index', compact('certificados', 'user'))
             ->with('i', (request()->input('page', 1) - 1) * $certificados->perPage());
-        //return view('perfil.index');
+        //return view('perfil.index'); 
     }
 
 }

@@ -36,9 +36,9 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Estado Asistencia</th>
-										<th>Usuario Id</th>
-										<th>Evento Id</th>
+										<th>Estado de la asistencia</th>
+										<th>Usuario</th>
+										<th>Evento</th>
 
                                         <th></th>
                                     </tr>
@@ -49,8 +49,8 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $inscribeUsuarioEvento->estado_asistencia }}</td>
-											<td>{{ $inscribeUsuarioEvento->usuario_id }}</td>
-											<td>{{ $inscribeUsuarioEvento->evento_id }}</td>
+											<td>{{ $inscribeUsuarioEvento->users[0]->name }}</td>
+											<td>{{ $inscribeUsuarioEvento->eventos[0]->nombre_evento }}</td>
 
                                             <td>
                                                 <form action="{{ route('inscribe-usuario-eventos.destroy',$inscribeUsuarioEvento->id) }}" method="POST">

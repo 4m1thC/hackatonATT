@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -46,41 +45,70 @@
                             <img class="rounded card-img-top mb-5 mb-md-0" src="{{ $evento->portada }}" width="700"
                                 height="500" alt="..." />
                         </div>
+                        @php
+                            $sw = 'false';
+                            $id = $evento->id;
+                            $c = 0;
+                            foreach ($inscritos as $inscrito) {
+                                if ($inscrito->evento_id == $id) {
+                                    $c += 1;
+                                }
+                            }
+                        @endphp
                         <div class="col-md-6">
                             <div class="fs-5 mb-5">
-                                <span><b>Numero de cupos disponibles:</b> {{ $evento->nro_cupos }}</span>
+                                <span><b>Numero de cupos disponibles:</b> {{ $evento->nro_cupos - $c }}</span>
                                 <br>
                                 <span><b>Fecha del evento:</b> {{ $evento->fecha }}</span>
                             </div>
-                            <div class="overflow-auto"  style="height: 350px;">
+                            <div class="overflow-auto" style="height: 350px;">
                                 <p class="lead">{{ $evento->descripcion }}</p>
                             </div>
                             <div class="d-flex">
-                                <form method="POST" action="{{ route('inscribir_usuario') }}">
-                                    @csrf
-                                    <input type="hidden" name="id_evento" value="{{ $evento->id }}">
-                                    <button class="btn btn-outline-primary flex-shrink-0 me-1" type="submit">Inscribirse</button>
-                                </form>
-                                <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST">
-                                    <a class="btn btn-outline-dark flex-shrink-0 me-1"
-                                        href="{{ route('eventos.show', $evento->id) }}"><i class="fa fa-fw fa-eye"></i> Ver
-                                        mas</a>
-                                    <a class="btn btn-outline-success flex-shrink-0 me-1"
-                                        href="{{ route('eventos.edit', $evento->id) }}"><i class="fa fa-fw fa-edit"></i>
-                                        Edit</a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger flex-shrink-0 me-1"><i
-                                            class="fa fa-fw fa-trash"></i>
-                                        Delete</button>
-                                </form>
-                            </div>
+                                @foreach ($inscritos as $inscrito)
+                                    @if ($inscrito->evento_id == $evento->id && auth()->id() == $inscrito->usuario_id)
+                                        @php
+                                            $sw = 'true';
+                                        @endphp
+                                    @break
+                                @endif
+                            @endforeach
+
+                            @if ($sw == 'true')
+                                <button type="button" class="btn btn-success mx-1">Inscrito</button>
+                            @else
+                                @if ($evento->nro_cupos - $c > 0)
+                                    <form method="POST" action="{{ route('inscribir_usuario') }}">
+                                        @csrf
+                                        <input type="hidden" name="id_evento" value="{{ $evento->id }}">
+                                        <button class="btn btn-outline-primary flex-shrink-0 me-1"
+                                            type="submit">Inscribirse</button>
+                                    </form>
+                                @else
+                                    <button type="button" class="btn btn-danger px-1 mx-1">Sin
+                                        Cupo</button>
+                                @endif
+                            @endif
+                            <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST">
+                                <a class="btn btn-outline-dark flex-shrink-0 me-1"
+                                    href="{{ route('eventos.show', $evento->id) }}"><i class="fa fa-fw fa-eye"></i> Ver
+                                    mas</a>
+                                <a class="btn btn-outline-success flex-shrink-0 me-1"
+                                    href="{{ route('eventos.edit', $evento->id) }}"><i class="fa fa-fw fa-edit"></i>
+                                    Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger flex-shrink-0 me-1"><i
+                                        class="fa fa-fw fa-trash"></i>
+                                    Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </section>
-        {!! $eventos->links() !!}
+            </div>
+        @endforeach
+    </section>
+    {!! $eventos->links() !!}
 
-    </div>
+</div>
 @endsection

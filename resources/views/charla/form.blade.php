@@ -12,11 +12,6 @@
             {!! $errors->first('horario', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('archivo') }}
-            {{ Form::text('archivo', $charla->archivo, ['class' => 'form-control' . ($errors->has('archivo') ? ' is-invalid' : ''), 'placeholder' => 'Archivo']) }}
-            {!! $errors->first('archivo', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
             {{ Form::label('evento_id') }}
             {{ Form::select('evento_id', $eventos, $charla->evento_id, ['class' => 'form-control' . ($errors->has('evento_id') ? ' is-invalid' : ''), 'placeholder' => 'Evento Id']) }}
             {!! $errors->first('evento_id', '<div class="invalid-feedback">:message</div>') !!}
@@ -25,6 +20,14 @@
             {{ Form::label('expositor_id') }}
             {{ Form::select('expositor_id', $expositores, $charla->expositor_id, ['class' => 'form-control' . ($errors->has('expositor_id') ? ' is-invalid' : ''), 'placeholder' => 'Expositor Id']) }}
             {!! $errors->first('expositor_id', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('archivo') }}
+            <br>
+            <form class="form-group" enctype="multipart/form-data">
+                <input type="file" name="archivo" id="">
+            </form>
         </div>
 
     </div>
