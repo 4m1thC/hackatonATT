@@ -15,11 +15,15 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleAdmin = Role::create(['name'=>'Admin']);
-        $roleControl = Role::create(['name'=>'Control']);
-        $roleExpositor = Role::create(['name'=>'Expositor']);
+        $roleAdmin = Role::create(['name' => 'Admin']);
+        $roleControl = Role::create(['name' => 'Control']);
+        $roleExpositor = Role::create(['name' => 'Expositor']);
 
         //permisos admin
+        Permission::create(['name' => 'admin.rol.crear'])->assignRole($roleAdmin);
+        Permission::create(['name' => 'admin.rol.editar'])->assignRole($roleAdmin);
+        Permission::create(['name' => 'admin.rol.update'])->assignRole($roleAdmin);
+
         Permission::create(['name' => 'eventos.crear'])->assignRole($roleAdmin);
         Permission::create(['name' => 'eventos.editar'])->assignRole($roleAdmin);
         Permission::create(['name' => 'eventos.borrar'])->assignRole($roleAdmin);

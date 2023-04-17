@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminRolController;
 use App\Http\Controllers\ComentarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/', [ComentarioController::class, 'indexWelcome']);
 
 Auth::routes();
 
-Route::get('certificados/pdf/{id}',[App\Http\Controllers\CertificadoController::class, 'pdf'])->name('certificados.pdf');
+Route::get('certificados/pdf/{id}', [App\Http\Controllers\CertificadoController::class, 'pdf'])->name('certificados.pdf');
 
 Route::resource('perfil',  App\Http\Controllers\UserController::class)->middleware('auth');
 
@@ -41,3 +42,5 @@ Route::resource('comentarios',  App\Http\Controllers\ComentarioController::class
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/inscribir', [InscribeUsuarioEventoController::class, 'inscrito'])->name('inscribir_usuario');
+
+Route::resource('users', AdminRolController::class)->names('users');

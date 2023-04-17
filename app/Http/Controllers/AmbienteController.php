@@ -21,7 +21,7 @@ class AmbienteController extends Controller
     {
         $ambientes = Ambiente::paginate();
 
-        $eventos = Evento::pluck('nombre_evento','id');
+        $eventos = Evento::pluck('nombre_evento', 'id');
 
         return view('ambiente.index', compact('ambientes'))
             ->with('i', (request()->input('page', 1) - 1) * $ambientes->perPage());
@@ -36,8 +36,8 @@ class AmbienteController extends Controller
     {
         $ambiente = new Ambiente();
 
-        $eventos = Evento::pluck('nombre_evento','id');
-        
+        $eventos = Evento::pluck('nombre_evento', 'id');
+
         return view('ambiente.create', compact('ambiente', 'eventos'));
     }
 
@@ -80,9 +80,9 @@ class AmbienteController extends Controller
     {
         $ambiente = Ambiente::find($id);
 
-        $eventos = Evento::pluck('nombre_evento','id');
+        $eventos = Evento::pluck('nombre_evento', 'id');
 
-       return view('ambiente.edit', compact('ambiente', 'eventos'));
+        return view('ambiente.edit', compact('ambiente', 'eventos'));
     }
 
     /**

@@ -66,8 +66,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('home') }}">{{ __('Preguntas frecuentes') }}</a>
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('Preguntas frecuentes') }}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Roles') }}</a>
                             </li>
                         </ul>
                     @endif
