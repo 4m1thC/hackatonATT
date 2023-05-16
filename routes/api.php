@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::apiResource('eventos', EventoController::class);
-Route::apiResource('usuarios', UserController::class);
-Route::apiResource('inscripciones', InscribeController::class);
+Route::apiResource('eventos', EventoController::class)->middleware('auth:sanctum');
+//Route::apiResource('eventos', EventoController::class);
+Route::apiResource('usuarios', UserController::class)->middleware('auth:sanctum');
+//Route::apiResource('usuarios', UserController::class);
+Route::apiResource('inscripciones', InscribeController::class)->middleware('auth:sanctum');
+//Route::apiResource('inscripciones', InscribeController::class);
+Route::post('login', [App\Http\Controllers\Api\LoginController::class, 'login']);

@@ -38,27 +38,39 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('eventos.index') }}">{{ __('Eventos') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('charlas.index') }}">{{ __('Charlas') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('expositores.index') }}">{{ __('Expositores') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('certificados.index') }}">{{ __('Certificados') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('ambientes.index') }}">{{ __('Ambientes') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('materiales.index') }}">{{ __('Materiales') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('inscribe-usuario-eventos.index') }}">{{ __('Inscribe') }}</a>
-                            </li>
+                            @can('charlas.index')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('charlas.index') }}">{{ __('Charlas') }}</a>
+                                </li>
+                            @endcan
+                            @can('expositores.index')
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('expositores.index') }}">{{ __('Expositores') }}</a>
+                                </li>
+                            @endcan
+                            @can('certificados.index')
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('certificados.index') }}">{{ __('Certificados') }}</a>
+                                </li>
+                            @endcan
+                            @can('ambientes.index')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('ambientes.index') }}">{{ __('Ambientes') }}</a>
+                                </li>
+                            @endcan
+                            @can('materiales.index')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('materiales.index') }}">{{ __('Materiales') }}</a>
+                                </li>
+                            @endcan
+                            @can('certificados.index')
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('inscribe-usuario-eventos.index') }}">{{ __('Inscribe') }}</a>
+                                </li>
+                            @endcan
 
                             <li class="nav-item">
                                 <a class="nav-link"
@@ -69,9 +81,13 @@
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Preguntas frecuentes') }}</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Roles') }}</a>
-                            </li>
+                            @can('admin.rol.crear')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('users.index') }}">{{ __('Roles') }}</a>
+                                </li>
+                            @endcan
+
+
                         </ul>
                     @endif
 

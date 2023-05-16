@@ -30,12 +30,12 @@ Route::get('certificados/pdf/{id}', [App\Http\Controllers\CertificadoController:
 Route::resource('perfil',  App\Http\Controllers\UserController::class)->middleware('auth');
 
 Route::resource('eventos',  App\Http\Controllers\EventoController::class)->middleware('auth');
-Route::resource('ambientes',  App\Http\Controllers\AmbienteController::class)->middleware('auth');
-Route::resource('materiales',  App\Http\Controllers\MaterialeController::class)->middleware('auth');
-Route::resource('expositores',  App\Http\Controllers\ExpositoreController::class)->middleware('auth');
-Route::resource('charlas',  App\Http\Controllers\CharlaController::class)->middleware('auth');
-Route::resource('certificados',  App\Http\Controllers\CertificadoController::class)->middleware('auth');
-Route::resource('inscribe-usuario-eventos',  App\Http\Controllers\InscribeUsuarioEventoController::class)->middleware('auth');
+Route::resource('ambientes',  App\Http\Controllers\AmbienteController::class)->middleware(['auth', 'can:ambientes.index']);
+Route::resource('materiales',  App\Http\Controllers\MaterialeController::class)->middleware(['auth', 'can:materiales.index']);
+Route::resource('expositores',  App\Http\Controllers\ExpositoreController::class)->middleware(['auth', 'can:expositores.index']);
+Route::resource('charlas',  App\Http\Controllers\CharlaController::class)->middleware(['auth', 'can:charlas.index']);
+Route::resource('certificados',  App\Http\Controllers\CertificadoController::class)->middleware(['auth', 'can:certificados.index']);
+Route::resource('inscribe-usuario-eventos',  App\Http\Controllers\InscribeUsuarioEventoController::class)->middleware(['auth', 'can:inscripciones.index']);
 
 Route::resource('comentarios',  App\Http\Controllers\ComentarioController::class)->middleware('auth');
 

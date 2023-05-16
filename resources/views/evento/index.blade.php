@@ -13,15 +13,17 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Evento') }}
+                                {{ __('Eventos disponibles en nuestra plataforma') }}
                             </span>
 
-                            <div class="float-right">
-                                <a href="{{ route('eventos.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Create New') }}
-                                </a>
-                            </div>
+                            @can('eventos.crear')
+                                <div class="float-right">
+                                    <a href="{{ route('eventos.create') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        {{ __('Create New') }}
+                                    </a>
+                                </div>
+                            @endcan
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -93,14 +95,18 @@
                                 <a class="btn btn-outline-dark flex-shrink-0 me-1"
                                     href="{{ route('eventos.show', $evento->id) }}"><i class="fa fa-fw fa-eye"></i> Ver
                                     mas</a>
-                                <a class="btn btn-outline-success flex-shrink-0 me-1"
-                                    href="{{ route('eventos.edit', $evento->id) }}"><i class="fa fa-fw fa-edit"></i>
-                                    Edit</a>
+                                @can('eventos.editar')
+                                    <a class="btn btn-outline-success flex-shrink-0 me-1"
+                                        href="{{ route('eventos.edit', $evento->id) }}"><i class="fa fa-fw fa-edit"></i>
+                                        Edit</a>
+                                @endcan
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger flex-shrink-0 me-1"><i
-                                        class="fa fa-fw fa-trash"></i>
-                                    Delete</button>
+                                @can('eventos.borrar')
+                                    <button type="submit" class="btn btn-outline-danger flex-shrink-0 me-1"><i
+                                            class="fa fa-fw fa-trash"></i>
+                                        Delete</button>
+                                @endcan
                             </form>
                         </div>
                     </div>
